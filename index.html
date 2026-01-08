@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Shoaib AI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+}
+
+.app{
+  width:350px;
+  max-width:95%;
+  background:#111;
+  border-radius:20px;
+  box-shadow:0 0 30px rgba(0,255,255,0.3);
+  overflow:hidden;
+}
+
+.header{
+  padding:15px;
+  text-align:center;
+  background:linear-gradient(90deg,#00f2ff,#00c6ff);
+  color:black;
+  font-size:22px;
+  font-weight:bold;
+}
+
+.chat{
+  height:350px;
+  padding:10px;
+  overflow-y:auto;
+}
+
+.msg{
+  margin:8px 0;
+  padding:10px;
+  border-radius:15px;
+  max-width:80%;
+  animation: pop 0.3s ease;
+}
+
+.user{
+  background:#00c6ff;
+  color:black;
+  margin-left:auto;
+}
+
+.ai{
+  background:#222;
+  border:1px solid #00f2ff;
+}
+
+.input-box{
+  display:flex;
+  border-top:1px solid #333;
+}
+
+input{
+  flex:1;
+  padding:12px;
+  border:none;
+  outline:none;
+  font-size:16px;
+}
+
+button{
+  padding:12px 18px;
+  border:none;
+  background:#00c6ff;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+@keyframes pop{
+  from{transform:scale(0.9);opacity:0;}
+  to{transform:scale(1);opacity:1;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+  <div class="header">🤖 Shoaib AI</div>
+
+  <div class="chat" id="chat">
+    <div class="msg ai">
+      Hello 👋 Main Shoaib AI hoon.<br>
+      Tum jo bhi poochoge main answer dunga 😎
+    </div>
+  </div>
+
+  <div class="input-box">
+    <input id="input" placeholder="Ask something..." />
+    <button onclick="send()">Send</button>
+  </div>
+</div>
+
+<script>
+function send(){
+  let input = document.getElementById("input");
+  let text = input.value.trim();
+  if(text==="") return;
+
+  addMsg(text,"user");
+  input.value="";
+
+  setTimeout(()=>reply(text.toLowerCase()),500);
+}
+
+function addMsg(text,type){
+  let div=document.createElement("div");
+  div.className="msg "+type;
+  div.innerText=text;
+  document.getElementById("chat").appendChild(div);
+  document.getElementById("chat").scrollTop=9999;
+}
+
+function reply(q){
+  let ans="Main samajh gaya 🤔";
+
+  if(q.includes("who made you") || q.includes("kisne") || q.includes("banaya")){
+    ans="🤖 Mujhe Shoaib Akhtar Khan ne banaya hai 🔥";
+  }
+  else if(q.includes("name")){
+    ans="Mera naam Shoaib AI hai 😎";
+  }
+  else if(q.includes("hello") || q.includes("hi")){
+    ans="Hello 👋 Kaise ho?";
+  }
+  else if(q.includes("time")){
+    ans="Abhi current time tumhare device ke hisaab se chal raha hai ⏰";
+  }
+  else{
+    ans="Ye ek smart demo AI hai 🤖\nFuture me real AI API connect ho sakta hai 💡";
+  }
+
+  addMsg(ans,"ai");
+}
+</script>
+
+</body>
+</html>
